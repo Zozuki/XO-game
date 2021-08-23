@@ -43,7 +43,7 @@ public class GameboardView: UIView {
         for (_, markView) in markViewForPosition {
             markView.removeFromSuperview()
         }
-//        counter = 0
+        counter = 0
         markViewForPosition = [:]
     }
     
