@@ -12,9 +12,10 @@ import UIKit
 public class GameboardView: UIView {
     
     // MARK: - Public Properties
-//    var columns = [0,1,2]
-//    var rows = [0,1,2]
-//    var counter = 0
+    var columns = [0,1,2]
+    var rows = [0,1,2]
+    var counter = 0
+    var isComputerPlaying = false
     var computerPosition: GameboardPosition?
     public var onSelectPosition: ((GameboardPosition) -> Void)?
     
@@ -42,7 +43,7 @@ public class GameboardView: UIView {
         for (_, markView) in markViewForPosition {
             markView.removeFromSuperview()
         }
-//        counter = 0
+        counter = 0
         markViewForPosition = [:]
     }
     
@@ -81,26 +82,29 @@ public class GameboardView: UIView {
         let position = GameboardPosition(column: determineColumn(for: touchLocation),
                                          row: determineRow(for: touchLocation))
         onSelectPosition?(position)
-//        if counter != 4 {
-//            counter += 1
-//            computerPosition = GameboardPosition(column: self.rows.randomElement()!, row: self.columns.randomElement()!)
-//            if canPlaceMarkView(at: computerPosition!)  {
-//                computerTouches(position: computerPosition!)
-//            } else {
-//                while canPlaceMarkView(at: computerPosition!) != true {
-//                    computerPosition = GameboardPosition(column: self.rows.randomElement()!, row: self.columns.randomElement()!)
-//                }
-//                computerTouches(position: computerPosition!)
-//            }
-//        }
+        if isComputerPlaying {
+            if counter != 4 {
+                counter += 1
+                computerPosition = GameboardPosition(column: self.rows.randomElement()!, row: self.columns.randomElement()!)
+                if canPlaceMarkView(at: computerPosition!)  {
+                    computerTouches(position: computerPosition!)
+                } else {
+                    while canPlaceMarkView(at: computerPosition!) != true {
+                        computerPosition = GameboardPosition(column: self.rows.randomElement()!, row: self.columns.randomElement()!)
+                    }
+                    computerTouches(position: computerPosition!)
+                }
+            }
+        }
+        
         
     }
     
     // MARK: - Computer Touch Handling
     
-//    func computerTouches(position: GameboardPosition) {
-//        onSelectPosition?(position)
-//    }
+    func computerTouches(position: GameboardPosition) {
+        onSelectPosition?(position)
+    }
     
     // MARK: - UI
     
