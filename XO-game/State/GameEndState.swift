@@ -43,8 +43,8 @@ class GameEndState: PlayGameState {
             return "First"
         case .second:
             return "Second"
-//        case .computer:
-//            return "Computer"
+        case .computer:
+            return "Computer"
         }
     }
 }

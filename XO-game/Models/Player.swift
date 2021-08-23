@@ -12,20 +12,20 @@ import Foundation
 public enum Player: CaseIterable {
     case first
     case second
-//    case computer
+    case computer
     
     var nextWithSecondPlayer: Player {
         switch self {
         case .first: return .second
         case .second: return .first
-//        case .computer: return .computer
+        case .computer: return .computer
         }
     }
-//    var nextWithComputer: Player {
-//        switch self {
-//        case .first: return .computer
-//        case .second: return .second
-//        case .computer: return .first
-//        }
-//    }
+    var nextWithComputer: Player {
+        switch self {
+        case .first: return .computer
+        case .second: return .second
+        case .computer: return .first
+        }
+    }
 }
