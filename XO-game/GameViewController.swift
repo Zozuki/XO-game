@@ -32,15 +32,16 @@ class GameViewController: UIViewController {
         super.viewDidLoad()
         
         firstPlayerTurn()
-        
-        self.gameboardView.onSelectPosition = { [weak self] position in
+        if computerIsSecondPlayer {
+            gameboardView.isComputerPlaying = true
+        }
+        gameboardView.onSelectPosition = { [weak self] position in
             guard let self = self else { return }
 
             self.currentState.addSign(at: position)
             self.counter += 1
 
             if self.currentState.isMoveCompleted {
-                self.nextPlayerTurn()
                 if !self.computerIsSecondPlayer {
                     self.nextPlayerTurn()
                 } else {

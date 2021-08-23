@@ -15,6 +15,7 @@ public class GameboardView: UIView {
     var columns = [0,1,2]
     var rows = [0,1,2]
     var counter = 0
+    var isComputerPlaying = false
     var computerPosition: GameboardPosition?
     public var onSelectPosition: ((GameboardPosition) -> Void)?
     
@@ -81,18 +82,21 @@ public class GameboardView: UIView {
         let position = GameboardPosition(column: determineColumn(for: touchLocation),
                                          row: determineRow(for: touchLocation))
         onSelectPosition?(position)
-        if counter != 4 {
-            counter += 1
-            computerPosition = GameboardPosition(column: self.rows.randomElement()!, row: self.columns.randomElement()!)
-            if canPlaceMarkView(at: computerPosition!)  {
-                computerTouches(position: computerPosition!)
-            } else {
-                while canPlaceMarkView(at: computerPosition!) != true {
-                    computerPosition = GameboardPosition(column: self.rows.randomElement()!, row: self.columns.randomElement()!)
+        if isComputerPlaying {
+            if counter != 4 {
+                counter += 1
+                computerPosition = GameboardPosition(column: self.rows.randomElement()!, row: self.columns.randomElement()!)
+                if canPlaceMarkView(at: computerPosition!)  {
+                    computerTouches(position: computerPosition!)
+                } else {
+                    while canPlaceMarkView(at: computerPosition!) != true {
+                        computerPosition = GameboardPosition(column: self.rows.randomElement()!, row: self.columns.randomElement()!)
+                    }
+                    computerTouches(position: computerPosition!)
                 }
-                computerTouches(position: computerPosition!)
             }
         }
+        
         
     }
     
